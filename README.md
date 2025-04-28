@@ -68,7 +68,7 @@ Para compilar y ejecutar este proyecto, se necesita:
 
 5. Ejecuta el programa:
    ```cmd
-   Estructura-de-Datos-Lab-1.exe
+   \.Estructura-de-Datos-Lab-1.exe
    ```
 
 ## **Ejemplo de Uso**
