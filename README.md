@@ -12,7 +12,7 @@ si el héroe logra salvar a Olognia antes de que su vida llegue a 0.
 
 Para compilar y ejecutar este proyecto, se necesita:
 - Un compilador de C++ compatible con C++14
-- [CMake](https://cmake.org/) versión 3.31 o superior.
+- [CMake](https://cmake.org/) versión 3.10 o superior.
 
 ## Instrucciones de Construcción
 ### Linux/macOS
@@ -68,7 +68,7 @@ Para compilar y ejecutar este proyecto, se necesita:
 
 5. Ejecuta el programa:
    ```cmd
-   \.Estructura-de-Datos-Lab-1.exe
+   .\Estructura-de-Datos-Lab-1.exe
    ```
 
 ## **Ejemplo de Uso**
