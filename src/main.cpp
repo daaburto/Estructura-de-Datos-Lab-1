@@ -4,8 +4,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     int vida_mechon, cant_esbirros;
     // cout << "Vida del mechon:";
     cin >> vida_mechon;
@@ -19,22 +18,19 @@ int main()
 
     // Leer vida y añadirlo a vida_esbirro
     // cout << "Vida de los esbirros:";
-    for (int i = 0; i < cant_esbirros; i++)
-    {
+    for (int i = 0; i < cant_esbirros; i++) {
         cin >> vida_esbirro[i];
     }
 
     // Leer ataque y añadirlo a ataque_esbirro
     // cout << "Ataque de los esbirros:";
-    for (int i = 0; i < cant_esbirros; i++)
-    {
+    for (int i = 0; i < cant_esbirros; i++) {
         cin >> ataque_esbirro[i];
     }
 
     // Leer si el esbirro es CANO y añadirlo a esbirro_cano
     // cout << "El esbirro es CANO?:";
-    for (int i = 0; i < cant_esbirros; i++)
-    {
+    for (int i = 0; i < cant_esbirros; i++) {
         int temp;
         cin >> temp;
         esbirro_cano[i] = (temp == 1);
@@ -43,8 +39,7 @@ int main()
     // Inicializar clases
     Heroe mechon(vida_mechon);
     deque<Esbirro> esbirros; // deque que va a contener a los esbirros
-    for (int i = 0; i < cant_esbirros; i++)
-    {
+    for (int i = 0; i < cant_esbirros; i++) {
         esbirros.push_back(Esbirro(vida_esbirro[i], ataque_esbirro[i], esbirro_cano[i]));
     }
 
@@ -52,30 +47,27 @@ int main()
     while (!esbirros.empty() && !mechon.estaMuerto())
     {
         Esbirro &esbirro_actual = esbirros.front();
-
-        // Verifica si el esbirro tiene vida
-        if (!esbirro_actual.estaMuerto())
-            mechon.atacar(esbirro_actual);
-        else
-        {
+        mechon.atacar(esbirro_actual);
+        if (esbirro_actual.estaMuerto()) {
             mechon.eliminarEsbirro();
             esbirros.pop_front();
         }
 
-        // Verifica si el esbirro CANO puede separarse
-        if (esbirro_actual.getEsCano() && esbirro_actual.getAtaquesRecibidos() == 2)
-        {
-            esbirros.pop_front();
-            esbirros.push_front(esbirro_actual.crearEsbirro());
-            esbirros.push_front(esbirro_actual.crearEsbirro());
-        }
+        // Si aún quedan esbirros, Verifica si el esbirro CANO puede separarse
+        if (!esbirros.empty()) {
+            if (esbirro_actual.getEsCano() && esbirro_actual.getAtaquesRecibidos() == 2) {
+                Esbirro cano = esbirros.front();
+                esbirros.pop_front();
+                esbirros.push_front(cano.crearEsbirro());
+                esbirros.push_front(cano.crearEsbirro());
+            }
 
-        mechon.recibirAtaque(esbirro_actual.getAtaque());
+            mechon.recibirAtaque(esbirro_actual.getAtaque());
+        }
     }
 
-    if (esbirros.empty())
-    {
-        cout << "Daño total = " << mechon.getDañoTotal() << endl;
+    cout << "Daño total = " << mechon.getDañoTotal() << endl;
+    if (esbirros.empty()) {
         cout << "EZ pizi" << endl;
     }
     else

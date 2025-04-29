@@ -6,8 +6,8 @@
 #define HEROE_H
 #include "esbirro.h"
 using namespace std;
-class Heroe
-{
+
+class Heroe {
 private:
     int vida;
     int ataque;
@@ -16,50 +16,44 @@ private:
 
 public:
     // Constructor
-    Heroe(int vida)
-    {
+    Heroe(int vida) {
         this->vida = vida;
         this->ataque = 2;
         this->esbirros_eliminados = 0;
         this->daño_total = 0;
     }
 
-    int getVida()
-    {
+    int getVida() {
         return vida;
     }
-    int getAtaque()
-    {
+
+    int getAtaque() {
         return ataque;
     }
-    int getDañoTotal()
-    {
+
+    int getDañoTotal() {
         return daño_total;
     }
 
-    void recibirAtaque(int daño)
-    {
+    void recibirAtaque(int daño) {
         vida = max(0, vida - daño); // evita vida negativa
     }
 
-    bool estaMuerto()
-    {
+    bool estaMuerto() {
         return vida <= 0;
     }
 
-    void eliminarEsbirro()
-    {
+    void eliminarEsbirro() {
         esbirros_eliminados++;
-        if (esbirros_eliminados % 5 == 0)
-        {
+        if (esbirros_eliminados % 5 == 0) {
             ataque++; // Mejora del arma +1
         }
     }
 
-    void atacar(Esbirro &esbirro)
-    {
-        daño_total += ataque;
+    void atacar(Esbirro &esbirro) {
+        int aux = esbirro.getVida();
         esbirro.recibirAtaque(ataque);
+        daño_total += (aux - esbirro.getVida());
     }
 };
 #endif // HEROE_H
