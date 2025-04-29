@@ -1,7 +1,3 @@
-//
-// Created by daaburto on 4/26/2025.
-//
-
 #ifndef HEROE_H
 #define HEROE_H
 #include "esbirro.h"
@@ -35,6 +31,7 @@ public:
         return daño_total;
     }
 
+    // Reduce la vida del héroe según el valor del ataque recibido.
     void recibirAtaque(int daño) {
         vida = max(0, vida - daño); // evita vida negativa
     }
@@ -43,13 +40,17 @@ public:
         return vida <= 0;
     }
 
+    // Cuando el esbirro está muerto, se llama a esta función
+    // si los esbirros eliminados son múltiplo de 5, se le aumenta
+    // en uno el ataque del héroe
     void eliminarEsbirro() {
         esbirros_eliminados++;
         if (esbirros_eliminados % 5 == 0) {
-            ataque++; // Mejora del arma +1
+            ataque++;
         }
     }
 
+    // El héroe ataca a un esbirro, calcula el daño y lo suma al daño total.
     void atacar(Esbirro &esbirro) {
         int aux = esbirro.getVida();
         esbirro.recibirAtaque(ataque);

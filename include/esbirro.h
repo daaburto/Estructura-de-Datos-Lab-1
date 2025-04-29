@@ -1,10 +1,7 @@
-//
-// Created by daaburto on 4/26/2025.
-//
-
 #ifndef ESBIRRO_H
 #define ESBIRRO_H
 using namespace std;
+
 class Esbirro {
 private:
     int vida;
@@ -25,17 +22,21 @@ public:
     int getVida() {
         return vida;
     }
+
     int getAtaque() {
         return ataque;
     }
+
     bool getEsCano() {
         return es_cano;
     }
+
     int getAtaquesRecibidos() {
         return ataques_recibidos;
     }
 
-
+    // Reduce la vida del esbirro según el valor del ataque recibido y registra la cantidad de ataques recibidos
+    // para los CANOS
     void recibirAtaque(int ataque) {
         vida = max(0, vida - ataque); // Evita vida negativa
         ataques_recibidos++;
@@ -45,10 +46,12 @@ public:
         return vida <= 0;
     }
 
+    // Crea dos esbirros si es CANO y ha recibido 2 ataques
     void debeSpawnear() {
-        if (es_cano && ataques_recibidos == 2 && !estaMuerto())
+        if (es_cano && ataques_recibidos == 2 && !estaMuerto()) {
             crearEsbirro();
-        crearEsbirro();
+            crearEsbirro();
+        }
     }
 
     // Metodo para crear un esbirro (para cuando un cano se divide)

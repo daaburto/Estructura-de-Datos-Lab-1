@@ -6,9 +6,7 @@ using namespace std;
 
 int main() {
     int vida_mechon, cant_esbirros;
-    // cout << "Vida del mechon:";
     cin >> vida_mechon;
-    // cout << "Cantidad de esbirros contra el mechon:";
     cin >> cant_esbirros;
 
     // Crear arrays según la cantidad de esbirros que hay
@@ -17,19 +15,16 @@ int main() {
     bool esbirro_cano[cant_esbirros];
 
     // Leer vida y añadirlo a vida_esbirro
-    // cout << "Vida de los esbirros:";
     for (int i = 0; i < cant_esbirros; i++) {
         cin >> vida_esbirro[i];
     }
 
     // Leer ataque y añadirlo a ataque_esbirro
-    // cout << "Ataque de los esbirros:";
     for (int i = 0; i < cant_esbirros; i++) {
         cin >> ataque_esbirro[i];
     }
 
     // Leer si el esbirro es CANO y añadirlo a esbirro_cano
-    // cout << "El esbirro es CANO?:";
     for (int i = 0; i < cant_esbirros; i++) {
         int temp;
         cin >> temp;
@@ -44,16 +39,17 @@ int main() {
     }
 
     // Simulación del enfrentamiento
-    while (!esbirros.empty() && !mechon.estaMuerto())
-    {
+    while (!esbirros.empty() && !mechon.estaMuerto()) {
         Esbirro &esbirro_actual = esbirros.front();
         mechon.atacar(esbirro_actual);
+
+        // Verifica si el esbirro está muerto para quitarlo del deque
         if (esbirro_actual.estaMuerto()) {
             mechon.eliminarEsbirro();
             esbirros.pop_front();
         }
 
-        // Si aún quedan esbirros, Verifica si el esbirro CANO puede separarse
+        // Si aún quedan esbirros, verifica si el esbirro CANO puede separarse
         if (!esbirros.empty()) {
             if (esbirro_actual.getEsCano() && esbirro_actual.getAtaquesRecibidos() == 2) {
                 Esbirro cano = esbirros.front();
@@ -61,21 +57,16 @@ int main() {
                 esbirros.push_front(cano.crearEsbirro());
                 esbirros.push_front(cano.crearEsbirro());
             }
-
+            // mechón recibe ataque del esbirro en la primera posición del deque
             mechon.recibirAtaque(esbirro_actual.getAtaque());
         }
     }
 
-    cout << "Daño total = " << mechon.getDañoTotal() << endl;
+    cout << mechon.getDañoTotal() << endl;
     if (esbirros.empty()) {
         cout << "EZ pizi" << endl;
     }
     else
         cout << "RIP mechón" << endl;
-
-    cout << "Vida del mechon: " << mechon.getVida();
-    cout << "\n Ataque del mechon: " << mechon.getAtaque();
-    cout << "\n Esbirros faltantes: " << esbirros.size() << endl;
-
     return 0;
 }
